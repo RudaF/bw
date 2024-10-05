@@ -13,7 +13,7 @@ class  ComputedProperty:
         self.cached_args = properties
         self.cached_args_values_map = {}
         self.property_value = None
-        self.doc = doc
+        self.__doc__ = doc
 
     def __get__(self, class_instance, main_class):
         if not self.property_value:
@@ -36,10 +36,10 @@ class  ComputedProperty:
         self.deleter_func(class_instance)
 
     def setter(self, setter_func):
-        return type(self)(self.property_function, setter_func, self.deleter_func, self.cached_args, self.doc)
+        return type(self)(self.property_function, setter_func, self.deleter_func, self.cached_args, self.__doc__)
 
     def deleter(self, deleter_func):
-        return type(self)(self.property_function, self.setter_func, deleter_func, self.cached_args, self.doc)
+        return type(self)(self.property_function, self.setter_func, deleter_func, self.cached_args, self.__doc__)
 
     def _cache_computed_properties(self, class_instance):
         for prop in self.cached_args:
