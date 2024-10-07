@@ -1,12 +1,9 @@
-import math
-
-def computed_property(*properties):
-    def decorator(fun):
-        return ComputedProperty(getter_func=fun, properties=properties, doc=fun.__doc__)
-    return decorator
-        
-class  ComputedProperty:
-    def __init__(self, getter_func=None, setter_func=None, deleter_func=None, properties=None, doc=None):
+class ComputedProperty:
+    '''
+    Caches the return value of getter_func, a property of a class, based on values of the original class
+    where the property is defined. 
+    '''
+    def __init__(self, getter_func:function=None, setter_func:function=None, deleter_func:function=None, properties:list[str]=None, doc:str=None):
         self.property_function = getter_func
         self.setter_func = setter_func
         self.deleter_func = deleter_func
@@ -45,3 +42,13 @@ class  ComputedProperty:
         for prop in self.cached_args:
             cached_value = getattr(class_instance, prop)
             self.cached_args_values_map[prop] = cached_value
+
+
+def computed_property(*properties: list[str]) -> ComputedProperty:
+    '''
+    Recieves a list of string properties and return a decorator function for a class method
+    that caches that property based on the parameters passed as arguments. 
+    '''
+    def decorator(fun: function):
+        return ComputedProperty(getter_func=fun, properties=properties, doc=fun.__doc__)
+    return decorator
