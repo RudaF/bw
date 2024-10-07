@@ -1,7 +1,7 @@
 import io
 import os
 
-def last_lines(filename, read_size=io.DEFAULT_BUFFER_SIZE):
+def last_lines(filename: str, read_size: int = io.DEFAULT_BUFFER_SIZE):
     file_iterator = []
     with open(filename, 'r') as file:
         file_size = os.fstat(file.fileno()).st_size 
@@ -16,5 +16,3 @@ def last_lines(filename, read_size=io.DEFAULT_BUFFER_SIZE):
                 continue
             seek_position -= read_size
     return iter(file_iterator)
-
-

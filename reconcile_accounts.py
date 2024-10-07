@@ -162,10 +162,3 @@ def _create_transaction_identifier_date_map(transactions_list: list[list]) -> di
         transactions_map[dateless_transaction_identifier].update({transaction[0]: False})
     
     return transactions_map
-
-
-transactions1 = list(csv.reader(Path('transactions1.csv').open()))
-transactions2 = list(csv.reader(Path('transactions2.csv').open()))
-out1, out2 = reconcile_accounts(transactions1, transactions2)
-pprint(out1)
-pprint(out2)
