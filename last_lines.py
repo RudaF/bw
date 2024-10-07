@@ -13,9 +13,8 @@ def last_lines(filename, read_size=io.DEFAULT_BUFFER_SIZE):
                 file_iterator.append(current_line)
             except Exception:
                 seek_position -= 1
+                continue
             seek_position -= read_size
     return iter(file_iterator)
-
-lines = last_lines('text_file.txt', 3)
 
 
