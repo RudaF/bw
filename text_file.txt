@@ -1,7 +1,0 @@
-line 1
-bigger line 2
-even bigger line 3
-somewhat bigger line 4
-smaller line 5
-line 6
-ω
