@@ -1,9 +1,11 @@
+from typing import Callable
+
 class ComputedProperty:
     '''
     Caches the return value of getter_func, a property of a class, based on values of the original class
     where the property is defined. 
     '''
-    def __init__(self, getter_func:function=None, setter_func:function=None, deleter_func:function=None, properties:list[str]=None, doc:str=None):
+    def __init__(self, getter_func:Callable=None, setter_func:Callable=None, deleter_func:Callable=None, properties:list[str]=None, doc:str=None):
         self.property_function = getter_func
         self.setter_func = setter_func
         self.deleter_func = deleter_func
@@ -49,6 +51,6 @@ def computed_property(*properties: list[str]) -> ComputedProperty:
     Recieves a list of string properties and return a decorator function for a class method
     that caches that property based on the parameters passed as arguments. 
     '''
-    def decorator(fun: function):
+    def decorator(fun: Callable):
         return ComputedProperty(getter_func=fun, properties=properties, doc=fun.__doc__)
     return decorator
